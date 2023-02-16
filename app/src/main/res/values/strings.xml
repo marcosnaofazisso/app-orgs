@@ -12,4 +12,6 @@
     <string name="productDescription">Description 1</string>
     <string name="productPrice">29.99</string>
 
+    <string name="emptyList">This list is empty</string>
+
 </resources>

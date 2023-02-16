@@ -3,9 +3,7 @@ package com.marcosviniciusferreira.orgs.ui.activity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.marcosviniciusferreira.orgs.R
 import com.marcosviniciusferreira.orgs.dao.ProductsDAO
-import com.marcosviniciusferreira.orgs.databinding.ActivityMainBinding
 import com.marcosviniciusferreira.orgs.databinding.ActivityProductFormBinding
 import com.marcosviniciusferreira.orgs.model.Product
 import java.math.BigDecimal
@@ -20,16 +18,21 @@ class ProductFormActivity : AppCompatActivity() {
         binding = ActivityProductFormBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val fieldName = binding.editProductName.text.toString()
-        val fieldDescription = binding.editProductDescription.text.toString()
-        val fieldPrice = binding.editProductPrice.text.toString()
+        val fieldName = binding.editProductName
+        val fieldDescription = binding.editProductDescription
+        val fieldPrice = binding.editProductPrice
 
         binding.formButtonSave.setOnClickListener {
-            if (validateFormData(fieldName, fieldDescription, fieldPrice)) {
+
+            val name = fieldName.text.toString()
+            val description = fieldDescription.text.toString()
+            val price = fieldPrice.text.toString()
+
+            if (validateFormData(name, description, price)) {
                 val newProduct = Product(
-                    fieldName,
-                    fieldDescription,
-                    BigDecimal(fieldPrice)
+                    name,
+                    description,
+                    BigDecimal(price)
                 )
 
                 ProductsDAO().add(newProduct)
@@ -57,7 +60,7 @@ class ProductFormActivity : AppCompatActivity() {
             return false
         } else {
             BigDecimal(price)
-            return true
         }
+        return true
     }
 }
