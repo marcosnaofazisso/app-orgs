@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.marcosviniciusferreira.orgs.R
+import com.marcosviniciusferreira.orgs.databinding.ProductItemBinding
 import com.marcosviniciusferreira.orgs.model.Product
 import java.util.zip.Inflater
 
@@ -20,7 +21,8 @@ class ProductListAdapter(
     private val products = products.toMutableList()
 
 
-    class MyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    class MyViewHolder(private val binding: ProductItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         fun bind(product: Product) {
             val name = itemView.findViewById<TextView>(R.id.productName)
             val description = itemView.findViewById<TextView>(R.id.productDescription)
@@ -35,8 +37,8 @@ class ProductListAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val inflater = LayoutInflater.from(context)
-        val view = inflater.inflate(R.layout.product_item, parent, false)
-        return MyViewHolder(view)
+        val binding = ProductItemBinding.inflate(inflater, parent, false)
+        return MyViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
