@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Orgs</string>
+
+    <string name="fabContentDescription">add new product</string>
+    <string name="formProductNameHint">Name</string>
+    <string name="formProductDescriptionHint">Description</string>
+    <string name="formProductPriceHint">Price</string>
+    <string name="save">Save</string>
+
+
+    <string name="productName">Product 1</string>
+    <string name="productDescription">Description 1</string>
+    <string name="productPrice">29.99</string>
+
+</resources>
