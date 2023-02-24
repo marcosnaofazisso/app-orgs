@@ -10,6 +10,8 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.marcosviniciusferreira.orgs.R
 import com.marcosviniciusferreira.orgs.databinding.ProductItemBinding
 import com.marcosviniciusferreira.orgs.model.Product
+import java.text.NumberFormat
+import java.util.*
 import java.util.zip.Inflater
 
 class ProductListAdapter(
@@ -30,7 +32,10 @@ class ProductListAdapter(
 
             name.text = product.name
             description.text = product.description
-            price.text = "R$ " + product.price.toPlainString()
+
+            val formatter: NumberFormat = NumberFormat.getCurrencyInstance(Locale("pt", "br"))
+            val currencyPriceValue: String = formatter.format(product.price)
+            price.text = currencyPriceValue
         }
     }
 
