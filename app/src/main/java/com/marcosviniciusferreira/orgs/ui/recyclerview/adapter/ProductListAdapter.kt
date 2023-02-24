@@ -30,7 +30,7 @@ class ProductListAdapter(
 
             name.text = product.name
             description.text = product.description
-            price.text = product.price.toPlainString()
+            price.text = "R$ " + product.price.toPlainString()
         }
     }
 
