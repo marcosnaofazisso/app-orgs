@@ -61,7 +61,8 @@ class ProductFormActivity : AppCompatActivity() {
 
             AlertDialog.Builder(this).setView(bindingFormImage.root)
                 .setPositiveButton("Confirm") { _, _ ->
-                    if (url != null) {
+                    url = bindingFormImage.imageUrlTextField.text.toString()
+                    if (url != null || url != "") {
                         binding.activityFormProductImage.load(url)
                     } else {
                         Toast.makeText(
