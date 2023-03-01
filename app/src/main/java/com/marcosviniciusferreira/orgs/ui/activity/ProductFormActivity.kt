@@ -2,15 +2,19 @@ package com.marcosviniciusferreira.orgs.ui.activity
 
 import android.os.Bundle
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import coil.load
 import com.marcosviniciusferreira.orgs.dao.ProductsDAO
 import com.marcosviniciusferreira.orgs.databinding.ActivityProductFormBinding
+import com.marcosviniciusferreira.orgs.databinding.FormImageBinding
 import com.marcosviniciusferreira.orgs.model.Product
 import java.math.BigDecimal
 
 class ProductFormActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityProductFormBinding
+    private var url: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,9 +34,7 @@ class ProductFormActivity : AppCompatActivity() {
 
             if (validateFormData(name, description, price)) {
                 val newProduct = Product(
-                    name,
-                    description,
-                    BigDecimal(price)
+                    name, description, BigDecimal(price), url
                 )
 
                 ProductsDAO().add(newProduct)
@@ -40,6 +42,35 @@ class ProductFormActivity : AppCompatActivity() {
 
             }
 
+        }
+
+        binding.activityFormProductImage.setOnClickListener {
+
+            val bindingFormImage = FormImageBinding.inflate(layoutInflater)
+
+            bindingFormImage.formImageButtonLoad.setOnClickListener {
+                if (bindingFormImage.imageUrlTextField.text.toString().isBlank()) {
+                    Toast.makeText(this, "Digite uma URL válida!", Toast.LENGTH_SHORT).show()
+                } else {
+                    url = bindingFormImage.imageUrlTextField.text.toString()
+                    bindingFormImage.formImageImageview.load(url)
+
+                }
+
+            }
+
+            AlertDialog.Builder(this).setView(bindingFormImage.root)
+                .setPositiveButton("Confirm") { _, _ ->
+                    url = bindingFormImage.imageUrlTextField.text.toString()
+                    if (url != null || url != "") {
+                        binding.activityFormProductImage.load(url)
+                    } else {
+                        Toast.makeText(
+                            this, "Não foi informada uma URL válida...", Toast.LENGTH_SHORT
+                        ).show()
+
+                    }
+                }.setNegativeButton("Cancel") { _, _ -> }.show()
         }
 
 
