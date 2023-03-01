@@ -38,6 +38,7 @@ class ProductListAdapter(
             val currencyPriceValue: String = formatter.format(product.price)
             price.text = currencyPriceValue
 
+            //TODO: add image Url
             binding.imageProductItem.load("")
         }
     }

@@ -39,6 +39,7 @@
             app:layout_constraintTop_toBottomOf="@id/form_image_button_load">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/image_url_text_field"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Image URL"

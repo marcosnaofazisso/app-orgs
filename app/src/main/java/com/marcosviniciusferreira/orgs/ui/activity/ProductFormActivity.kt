@@ -1,14 +1,13 @@
 package com.marcosviniciusferreira.orgs.ui.activity
 
-import android.content.DialogInterface
 import android.os.Bundle
-import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import com.marcosviniciusferreira.orgs.R
+import coil.load
 import com.marcosviniciusferreira.orgs.dao.ProductsDAO
 import com.marcosviniciusferreira.orgs.databinding.ActivityProductFormBinding
+import com.marcosviniciusferreira.orgs.databinding.FormImageBinding
 import com.marcosviniciusferreira.orgs.model.Product
 import java.math.BigDecimal
 
@@ -47,9 +46,21 @@ class ProductFormActivity : AppCompatActivity() {
         }
 
         binding.activityFormProductImage.setOnClickListener {
+
+            val bindingFormImage = FormImageBinding.inflate(layoutInflater)
+
+            bindingFormImage.formImageButtonLoad.setOnClickListener {
+                val url = bindingFormImage.imageUrlTextField.text.toString()
+                bindingFormImage.formImageImageview.load(url)
+
+            }
+
             AlertDialog.Builder(this)
-                .setView(R.layout.form_image)
-                .setPositiveButton("Confirm", { _, _ -> })
+                .setView(bindingFormImage.root)
+                .setPositiveButton("Confirm", { _, _ ->
+                    val url = bindingFormImage.imageUrlTextField.text.toString()
+                    binding.activityFormProductImage.load(url)
+                })
                 .setNegativeButton("Cancel", { _, _ -> })
                 .show()
         }
