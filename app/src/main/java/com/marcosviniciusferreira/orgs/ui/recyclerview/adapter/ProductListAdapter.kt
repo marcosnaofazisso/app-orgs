@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
+import coil.load
 import com.marcosviniciusferreira.orgs.R
 import com.marcosviniciusferreira.orgs.databinding.ProductItemBinding
 import com.marcosviniciusferreira.orgs.model.Product
@@ -36,6 +37,8 @@ class ProductListAdapter(
             val formatter: NumberFormat = NumberFormat.getCurrencyInstance(Locale("pt", "br"))
             val currencyPriceValue: String = formatter.format(product.price)
             price.text = currencyPriceValue
+
+            binding.imageProductItem.load("")
         }
     }
 

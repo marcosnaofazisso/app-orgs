@@ -1,8 +1,12 @@
 package com.marcosviniciusferreira.orgs.ui.activity
 
+import android.content.DialogInterface
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import com.marcosviniciusferreira.orgs.R
 import com.marcosviniciusferreira.orgs.dao.ProductsDAO
 import com.marcosviniciusferreira.orgs.databinding.ActivityProductFormBinding
 import com.marcosviniciusferreira.orgs.model.Product
@@ -40,6 +44,14 @@ class ProductFormActivity : AppCompatActivity() {
 
             }
 
+        }
+
+        binding.activityFormProductImage.setOnClickListener {
+            AlertDialog.Builder(this)
+                .setView(R.layout.form_image)
+                .setPositiveButton("Confirm", { _, _ -> })
+                .setNegativeButton("Cancel", { _, _ -> })
+                .show()
         }
 
 
