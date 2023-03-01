@@ -14,6 +14,7 @@ import java.math.BigDecimal
 class ProductFormActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityProductFormBinding
+    private var url: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,9 +34,7 @@ class ProductFormActivity : AppCompatActivity() {
 
             if (validateFormData(name, description, price)) {
                 val newProduct = Product(
-                    name,
-                    description,
-                    BigDecimal(price)
+                    name, description, BigDecimal(price), url
                 )
 
                 ProductsDAO().add(newProduct)
@@ -50,19 +49,27 @@ class ProductFormActivity : AppCompatActivity() {
             val bindingFormImage = FormImageBinding.inflate(layoutInflater)
 
             bindingFormImage.formImageButtonLoad.setOnClickListener {
-                val url = bindingFormImage.imageUrlTextField.text.toString()
-                bindingFormImage.formImageImageview.load(url)
+                if (bindingFormImage.imageUrlTextField.text.toString().isBlank()) {
+                    Toast.makeText(this, "Digite uma URL válida!", Toast.LENGTH_SHORT).show()
+                } else {
+                    url = bindingFormImage.imageUrlTextField.text.toString()
+                    bindingFormImage.formImageImageview.load(url)
+
+                }
 
             }
 
-            AlertDialog.Builder(this)
-                .setView(bindingFormImage.root)
-                .setPositiveButton("Confirm", { _, _ ->
-                    val url = bindingFormImage.imageUrlTextField.text.toString()
-                    binding.activityFormProductImage.load(url)
-                })
-                .setNegativeButton("Cancel", { _, _ -> })
-                .show()
+            AlertDialog.Builder(this).setView(bindingFormImage.root)
+                .setPositiveButton("Confirm") { _, _ ->
+                    if (url != null) {
+                        binding.activityFormProductImage.load(url)
+                    } else {
+                        Toast.makeText(
+                            this, "Não foi informada uma URL válida...", Toast.LENGTH_SHORT
+                        ).show()
+
+                    }
+                }.setNegativeButton("Cancel") { _, _ -> }.show()
         }
 
 
