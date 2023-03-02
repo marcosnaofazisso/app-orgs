@@ -44,10 +44,10 @@ class ProductFormActivity : AppCompatActivity() {
         }
 
         binding.activityFormProductImage.setOnClickListener {
-            FormImageDialog(this).show({ imageUrl ->
+            FormImageDialog(this).show(url) { imageUrl ->
                 url = imageUrl
                 binding.activityFormProductImage.tryLoadImage(url)
-            })
+            }
         }
 
 

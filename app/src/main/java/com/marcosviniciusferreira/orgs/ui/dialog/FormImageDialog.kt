@@ -11,9 +11,14 @@ class FormImageDialog(private val context: Context) {
 
     private var url: String? = null
 
-    fun show(whenImageLoaded: (imageUrl: String) -> Unit) {
+    fun show(defaultUrl: String? = null, whenImageLoaded: (imageUrl: String) -> Unit) {
 
         val binding = FormImageBinding.inflate(LayoutInflater.from(context))
+
+        defaultUrl?.let {
+            binding.formImageImageview.tryLoadImage(it)
+            binding.imageUrlTextField.setText(it)
+        }
 
         binding.formImageButtonLoad.setOnClickListener {
             url = binding.imageUrlTextField.text.toString()
