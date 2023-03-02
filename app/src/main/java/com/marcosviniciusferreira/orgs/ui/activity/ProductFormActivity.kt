@@ -17,6 +17,7 @@ class ProductFormActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        title = "Create New Product"
 
         binding = ActivityProductFormBinding.inflate(layoutInflater)
         setContentView(binding.root)
