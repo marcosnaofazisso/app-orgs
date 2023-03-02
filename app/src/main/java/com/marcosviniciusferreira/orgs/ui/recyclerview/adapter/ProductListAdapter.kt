@@ -16,8 +16,7 @@ import java.util.*
 import java.util.zip.Inflater
 
 class ProductListAdapter(
-    private val context: Context,
-    products: List<Product>
+    private val context: Context, products: List<Product>
 
 ) : RecyclerView.Adapter<ProductListAdapter.MyViewHolder>() {
 
@@ -38,10 +37,8 @@ class ProductListAdapter(
             val currencyPriceValue: String = formatter.format(product.price)
             price.text = currencyPriceValue
 
-            if (product.image != null) {
-                binding.imageProductItem.load(product.image)
-            } else {
-                binding.imageProductItem.load(R.drawable.imagem_padrao)
+            binding.imageProductItem.load(product.image) {
+                fallback(R.drawable.imagem_padrao)
             }
         }
     }

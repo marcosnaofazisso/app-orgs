@@ -2,13 +2,12 @@ package com.marcosviniciusferreira.orgs.ui.activity
 
 import android.os.Bundle
 import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import coil.load
 import com.marcosviniciusferreira.orgs.dao.ProductsDAO
 import com.marcosviniciusferreira.orgs.databinding.ActivityProductFormBinding
-import com.marcosviniciusferreira.orgs.databinding.FormImageBinding
+import com.marcosviniciusferreira.orgs.extensions.tryLoadImage
 import com.marcosviniciusferreira.orgs.model.Product
+import com.marcosviniciusferreira.orgs.ui.dialog.FormImageDialog
 import java.math.BigDecimal
 
 class ProductFormActivity : AppCompatActivity() {
@@ -45,32 +44,10 @@ class ProductFormActivity : AppCompatActivity() {
         }
 
         binding.activityFormProductImage.setOnClickListener {
-
-            val bindingFormImage = FormImageBinding.inflate(layoutInflater)
-
-            bindingFormImage.formImageButtonLoad.setOnClickListener {
-                if (bindingFormImage.imageUrlTextField.text.toString().isBlank()) {
-                    Toast.makeText(this, "Digite uma URL válida!", Toast.LENGTH_SHORT).show()
-                } else {
-                    url = bindingFormImage.imageUrlTextField.text.toString()
-                    bindingFormImage.formImageImageview.load(url)
-
-                }
-
-            }
-
-            AlertDialog.Builder(this).setView(bindingFormImage.root)
-                .setPositiveButton("Confirm") { _, _ ->
-                    url = bindingFormImage.imageUrlTextField.text.toString()
-                    if (url != null || url != "") {
-                        binding.activityFormProductImage.load(url)
-                    } else {
-                        Toast.makeText(
-                            this, "Não foi informada uma URL válida...", Toast.LENGTH_SHORT
-                        ).show()
-
-                    }
-                }.setNegativeButton("Cancel") { _, _ -> }.show()
+            FormImageDialog(this).show({ imageUrl ->
+                url = imageUrl
+                binding.activityFormProductImage.tryLoadImage(url)
+            })
         }
 
 
