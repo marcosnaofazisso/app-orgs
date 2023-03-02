@@ -2,15 +2,10 @@ package com.marcosviniciusferreira.orgs.ui.activity
 
 import android.os.Bundle
 import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import coil.load
-import coil.request.ErrorResult
-import coil.request.ImageRequest
-import com.marcosviniciusferreira.orgs.R
 import com.marcosviniciusferreira.orgs.dao.ProductsDAO
 import com.marcosviniciusferreira.orgs.databinding.ActivityProductFormBinding
-import com.marcosviniciusferreira.orgs.databinding.FormImageBinding
+import com.marcosviniciusferreira.orgs.extensions.tryLoadImage
 import com.marcosviniciusferreira.orgs.model.Product
 import com.marcosviniciusferreira.orgs.ui.dialog.FormImageDialog
 import java.math.BigDecimal
@@ -49,7 +44,10 @@ class ProductFormActivity : AppCompatActivity() {
         }
 
         binding.activityFormProductImage.setOnClickListener {
-            FormImageDialog(this).show()
+            FormImageDialog(this).show({ imageUrl ->
+                url = imageUrl
+                binding.activityFormProductImage.tryLoadImage(url)
+            })
         }
 
 
