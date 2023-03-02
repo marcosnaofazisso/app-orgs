@@ -17,6 +17,7 @@ class ProductFormActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        title = "Create New Product"
 
         binding = ActivityProductFormBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -44,10 +45,10 @@ class ProductFormActivity : AppCompatActivity() {
         }
 
         binding.activityFormProductImage.setOnClickListener {
-            FormImageDialog(this).show({ imageUrl ->
+            FormImageDialog(this).show(url) { imageUrl ->
                 url = imageUrl
                 binding.activityFormProductImage.tryLoadImage(url)
-            })
+            }
         }
 
 
