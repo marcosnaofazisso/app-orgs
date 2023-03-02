@@ -5,6 +5,9 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import coil.load
+import coil.request.ErrorResult
+import coil.request.ImageRequest
+import com.marcosviniciusferreira.orgs.R
 import com.marcosviniciusferreira.orgs.dao.ProductsDAO
 import com.marcosviniciusferreira.orgs.databinding.ActivityProductFormBinding
 import com.marcosviniciusferreira.orgs.databinding.FormImageBinding
@@ -15,6 +18,8 @@ class ProductFormActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityProductFormBinding
     private var url: String? = null
+    private var notFoundImageUrl: String =
+        "https://thumbs.dreamstime.com/b/error-page-juicy-pineapple-background-template-reports-page-not-found-151438439.jpg"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,7 +58,16 @@ class ProductFormActivity : AppCompatActivity() {
                     Toast.makeText(this, "Digite uma URL válida!", Toast.LENGTH_SHORT).show()
                 } else {
                     url = bindingFormImage.imageUrlTextField.text.toString()
-                    bindingFormImage.formImageImageview.load(url)
+                    bindingFormImage.formImageImageview.load(url) {
+                        placeholder(R.drawable.placeholder)
+                        fallback(R.drawable.fruit_not_found)
+                        error(R.drawable.fruit_not_found)
+
+                        listener(onError = {_,_ ->
+                            Toast.makeText(this@ProductFormActivity, "Erro ao carregar URL", Toast.LENGTH_SHORT).show()
+                        })
+
+                    }
 
                 }
 
@@ -62,14 +76,18 @@ class ProductFormActivity : AppCompatActivity() {
             AlertDialog.Builder(this).setView(bindingFormImage.root)
                 .setPositiveButton("Confirm") { _, _ ->
                     url = bindingFormImage.imageUrlTextField.text.toString()
-                    if (url != null || url != "") {
-                        binding.activityFormProductImage.load(url)
-                    } else {
-                        Toast.makeText(
-                            this, "Não foi informada uma URL válida...", Toast.LENGTH_SHORT
-                        ).show()
+                    binding.activityFormProductImage.load(url) {
+                        placeholder(R.drawable.placeholder)
+                        fallback(R.drawable.fruit_not_found)
+                        error(R.drawable.fruit_not_found)
+
+                        listener(onError = {_,_ ->
+                            Toast.makeText(this@ProductFormActivity, "Erro ao carregar URL", Toast.LENGTH_SHORT).show()
+                        })
+
 
                     }
+
                 }.setNegativeButton("Cancel") { _, _ -> }.show()
         }
 
