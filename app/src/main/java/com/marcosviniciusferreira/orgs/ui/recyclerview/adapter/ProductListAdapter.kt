@@ -1,20 +1,16 @@
 package com.marcosviniciusferreira.orgs.ui.recyclerview.adapter
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import coil.load
 import com.marcosviniciusferreira.orgs.R
 import com.marcosviniciusferreira.orgs.databinding.ProductItemBinding
 import com.marcosviniciusferreira.orgs.model.Product
 import java.text.NumberFormat
 import java.util.*
-import java.util.zip.Inflater
 
 class ProductListAdapter(
     private val context: Context,
@@ -31,7 +27,7 @@ class ProductListAdapter(
         private lateinit var product: Product
 
         init {
-            itemView.setOnClickListener{
+            itemView.setOnClickListener {
                 if (::product.isInitialized) {
                     itemClickListener(product)
                 }
