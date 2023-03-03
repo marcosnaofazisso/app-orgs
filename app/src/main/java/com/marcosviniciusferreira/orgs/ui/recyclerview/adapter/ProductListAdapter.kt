@@ -1,6 +1,7 @@
 package com.marcosviniciusferreira.orgs.ui.recyclerview.adapter
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,16 +17,30 @@ import java.util.*
 import java.util.zip.Inflater
 
 class ProductListAdapter(
-    private val context: Context, products: List<Product>
+    private val context: Context,
+    products: List<Product>,
+    var itemClickListener: (product: Product) -> Unit = {}
 
 ) : RecyclerView.Adapter<ProductListAdapter.MyViewHolder>() {
 
     private val products = products.toMutableList()
 
-
-    class MyViewHolder(private val binding: ProductItemBinding) :
+    inner class MyViewHolder(private val binding: ProductItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
+
+        private lateinit var product: Product
+
+        init {
+            itemView.setOnClickListener{
+                if (::product.isInitialized) {
+                    itemClickListener(product)
+                }
+            }
+        }
+
+
         fun bind(product: Product) {
+            this.product = product
             val name = itemView.findViewById<TextView>(R.id.productName)
             val description = itemView.findViewById<TextView>(R.id.productDescription)
             val price = itemView.findViewById<TextView>(R.id.productPrice)
