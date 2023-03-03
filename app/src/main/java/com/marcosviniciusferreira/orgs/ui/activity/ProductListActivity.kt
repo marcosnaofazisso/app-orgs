@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.marcosviniciusferreira.orgs.dao.ProductsDAO
 import com.marcosviniciusferreira.orgs.databinding.ActivityProductsListBinding
+import com.marcosviniciusferreira.orgs.ui.helper.KEY_PRODUCT
 import com.marcosviniciusferreira.orgs.ui.recyclerview.adapter.ProductListAdapter
 
 class ProductListActivity : AppCompatActivity() {
@@ -47,10 +48,9 @@ class ProductListActivity : AppCompatActivity() {
         recyclerView.layoutManager = LinearLayoutManager(this)
         adapter.itemClickListener = {
             val intent = Intent(this, ProductDetailsActivity::class.java).apply {
-                //putExtra("product", it)
+                putExtra(KEY_PRODUCT, it)
             }
             startActivity(intent)
-            Log.i("=====>>> LIST", "itemClickListener ${it.name}")
             Toast.makeText(this, "itemClickListener ${it.name}", Toast.LENGTH_SHORT).show()
         }
     }

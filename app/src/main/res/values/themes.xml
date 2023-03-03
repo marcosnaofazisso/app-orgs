@@ -23,5 +23,10 @@
 
     <style name="Theme.Orgs.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
+    <style name="NoActionBar" parent="Theme.Orgs">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
     <style name="Theme.Orgs.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>

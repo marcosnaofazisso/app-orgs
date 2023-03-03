@@ -13,7 +13,7 @@
         tools:context=".ui.activity.ProductDetailsActivity">
 
         <ImageView
-            android:id="@+id/imageProduct"
+            android:id="@+id/imageProductDetail"
             android:layout_width="0dp"
             android:layout_height="200dp"
             android:scaleType="centerCrop"
@@ -24,7 +24,7 @@
             tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
         <TextView
-            android:id="@+id/textProductPrice"
+            android:id="@+id/textProductDetailPrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
@@ -39,12 +39,12 @@
             android:textColor="@color/colorPrimary"
             android:textSize="24sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/imageProduct"
+            app:layout_constraintBottom_toBottomOf="@+id/imageProductDetail"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageProduct" />
+            app:layout_constraintTop_toBottomOf="@+id/imageProductDetail" />
 
         <TextView
-            android:id="@+id/textProductName"
+            android:id="@+id/textProductDetailName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
@@ -53,10 +53,10 @@
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textProductPrice" />
+            app:layout_constraintTop_toBottomOf="@+id/textProductDetailPrice" />
 
         <TextView
-            android:id="@+id/textProductDescription"
+            android:id="@+id/textProductDetailDescription"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
@@ -65,6 +65,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textProductName" />
+            app:layout_constraintTop_toBottomOf="@+id/textProductDetailName" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
