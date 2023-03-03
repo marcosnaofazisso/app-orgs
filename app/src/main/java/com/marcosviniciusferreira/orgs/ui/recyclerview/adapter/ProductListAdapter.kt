@@ -50,6 +50,7 @@ class ProductListAdapter(
 
             binding.imageProductItem.load(product.image) {
                 fallback(R.drawable.imagem_padrao)
+                error(R.drawable.product_image_not_found)
             }
         }
     }
