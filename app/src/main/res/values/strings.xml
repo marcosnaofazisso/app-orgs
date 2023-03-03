@@ -14,4 +14,7 @@
 
     <string name="emptyList">This list is empty</string>
 
+    <string name="defaultValue">TextView</string>
+    <string name="productImageDetail">product image</string>
+
 </resources>

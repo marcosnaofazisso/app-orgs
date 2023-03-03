@@ -13,7 +13,7 @@ fun ImageView.tryLoadImage(url: String? = null) {
         listener(onError = { _, _ ->
             Toast.makeText(
                 context,
-                "Erro ao carregar URL",
+                "Fail to load image URL",
                 Toast.LENGTH_SHORT
             ).show()
         })

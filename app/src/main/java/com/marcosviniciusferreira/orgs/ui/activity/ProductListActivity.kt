@@ -2,12 +2,15 @@ package com.marcosviniciusferreira.orgs.ui.activity
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.marcosviniciusferreira.orgs.dao.ProductsDAO
 import com.marcosviniciusferreira.orgs.databinding.ActivityProductsListBinding
+import com.marcosviniciusferreira.orgs.ui.helper.KEY_PRODUCT
 import com.marcosviniciusferreira.orgs.ui.recyclerview.adapter.ProductListAdapter
 
 class ProductListActivity : AppCompatActivity() {
@@ -43,6 +46,13 @@ class ProductListActivity : AppCompatActivity() {
         recyclerView.hasFixedSize()
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
+        adapter.itemClickListener = {
+            val intent = Intent(this, ProductDetailsActivity::class.java).apply {
+                putExtra(KEY_PRODUCT, it)
+            }
+            startActivity(intent)
+            Toast.makeText(this, "itemClickListener ${it.name}", Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun settingFab() {
