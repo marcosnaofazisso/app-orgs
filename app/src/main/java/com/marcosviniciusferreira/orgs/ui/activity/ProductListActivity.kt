@@ -46,7 +46,10 @@ class ProductListActivity : AppCompatActivity() {
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
         adapter.itemClickListener = {
-            
+            val intent = Intent(this, ProductDetailsActivity::class.java).apply {
+                //putExtra("product", it)
+            }
+            startActivity(intent)
             Log.i("=====>>> LIST", "itemClickListener ${it.name}")
             Toast.makeText(this, "itemClickListener ${it.name}", Toast.LENGTH_SHORT).show()
         }
