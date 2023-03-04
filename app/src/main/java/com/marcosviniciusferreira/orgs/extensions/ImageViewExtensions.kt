@@ -7,8 +7,8 @@ import com.marcosviniciusferreira.orgs.R
 
 fun ImageView.tryLoadImage(url: String? = null) {
     load(url) {
-        fallback(R.drawable.fruit_not_found)
-        error(R.drawable.fruit_not_found)
+        fallback(R.drawable.product_image_not_found)
+        error(R.drawable.product_image_not_found)
 
         listener(onError = { _, _ ->
             Toast.makeText(

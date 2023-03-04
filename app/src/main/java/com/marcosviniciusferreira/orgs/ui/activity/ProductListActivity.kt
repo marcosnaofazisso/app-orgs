@@ -51,7 +51,6 @@ class ProductListActivity : AppCompatActivity() {
                 putExtra(KEY_PRODUCT, it)
             }
             startActivity(intent)
-            Toast.makeText(this, "itemClickListener ${it.name}", Toast.LENGTH_SHORT).show()
         }
     }
 
