@@ -34,7 +34,7 @@ class ProductFormActivity : AppCompatActivity() {
 
             if (validateFormData(name, description, price)) {
                 val newProduct = Product(
-                    name, description, BigDecimal(price), url
+                    0L, name, description, BigDecimal(price), url
                 )
 
                 ProductsDAO().add(newProduct)
